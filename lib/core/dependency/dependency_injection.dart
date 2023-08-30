@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:std_dev_task/core/widgets/sized_box.dart';
 import 'package:std_dev_task/features/contact/data/datasources/contact_api_provider.dart';
 import 'package:std_dev_task/features/contact/data/repositories/contact_repository_lmpl.dart';
 import 'package:std_dev_task/features/contact/domain/repositories/contact_repository.dart';
@@ -6,20 +7,19 @@ import 'package:std_dev_task/features/contact/domain/usecases/get_contacts_useca
 import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
 
 GetIt locator = GetIt.instance();
+setup() {
+  locator.registerSingleton(AppSizedBox());
 
-void setup() {
-  /// api providers
+  // api providers
   locator.registerSingleton<ContactApiProvider>(ContactApiProvider());
 
-  /// repositories
+  // repositories
   locator
       .registerSingleton<ContactRepository>(ContactRepositoryImpl(locator()));
 
-  /// usecases
+  // usecases
   locator.registerSingleton<GetContactsUsecase>(GetContactsUsecase(locator()));
 
-  /// state managements
-  locator.registerSingleton<ContactBloc>(ContactBloc(
-    contactsUsecase: locator(),
-  ));
+  // state managements
+  locator.registerSingleton<ContactBloc>(ContactBloc(locator()));
 }

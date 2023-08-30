@@ -8,10 +8,10 @@ part 'contact_state.dart';
 
 class ContactBloc extends Bloc<ContactEvent, ContactState> {
   final GetContactsUsecase contactsUsecase;
-  ContactBloc({
-    required this.contactsUsecase,
-  }) : super(ContactState(contactList: EventLoading())) {
-    on<GetContacts>((event, emit) async{
+  ContactBloc(
+     this.contactsUsecase,
+  ) : super(ContactState(contactList: EventLoading())) {
+    on<GetContacts>((event, emit) async {
       emit(state.copyWith(contactList: EventLoading()));
 
       var result = await contactsUsecase.call();

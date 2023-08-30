@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:std_dev_task/core/dependency/dependency_injection.dart';
+import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
+import 'package:std_dev_task/features/contact/presentation/pages/cantacts_page.dart';
 
-void main() {
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+void main() async {
+  locator = GetIt.instance;
+  WidgetsFlutterBinding.ensureInitialized();
+  await setup();
+
   runApp(const MyApp());
 }
 
@@ -10,11 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'STD dev',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'STD dev contacts'),
     );
   }
 }
@@ -29,36 +39,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => locator<ContactBloc>())
+          // BlocProvider(
+          //   create: (context) => SubjectBloc(),
+          // ),
+        ],
+        child: const ContactsPage(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: null,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
