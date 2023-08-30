@@ -6,4 +6,5 @@ abstract class ContactState extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class ContactInitial extends ContactState {}
