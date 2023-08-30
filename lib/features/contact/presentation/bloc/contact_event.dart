@@ -6,3 +6,5 @@ abstract class ContactEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetContacts extends ContactEvent{}

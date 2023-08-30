@@ -24,7 +24,6 @@ class ContactModel extends ContactEntity {
   factory ContactModel.fromRawJson(String str) =>
       ContactModel.fromJson(json.decode(str));
 
-  String toRawJson() => json.encode(toJson());
 
   factory ContactModel.fromJson(Map<String, dynamic> json) => ContactModel(
         id: json["_id"],
@@ -38,16 +37,6 @@ class ContactModel extends ContactEntity {
         phone: json["phone"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "firstName": firstName,
-        "lastName": lastName,
-        "email": email,
-        "notes": notes,
-        "picture":
-            picture == null ? [] : List<dynamic>.from(picture!.map((x) => x)),
-        "phone": phone,
-      };
 
   @override
   List<Object?> get props => [
