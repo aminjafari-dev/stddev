@@ -8,6 +8,6 @@ class AppPageRoute {
        <String, WidgetBuilder>{
         "/":(context) => const MyHomePage(),
         // "/":(context) => const ContactsPage(),
-        "add_contact":(context) => const AddContactPage()
+        "add_contact":(context) =>  AddContactPage()
       };
 }

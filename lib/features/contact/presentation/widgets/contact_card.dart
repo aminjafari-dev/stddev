@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:std_dev_task/config/general_config.dart';
+import 'package:std_dev_task/config/styles/image_path.dart';
 import 'package:std_dev_task/core/widgets/sized_box.dart';
 
 import '../../domain/entities/contact_entity.dart';
@@ -20,20 +21,27 @@ class ContactCard extends StatelessWidget {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child: data.picture == null || data.picture!.isEmpty
-                  ? STDSizedBox.empty
-                  : ClipRRect(
-                      borderRadius: GeneralConfig.radius_50,
-                      child: Image.network(
+              child: ClipRRect(
+                borderRadius: GeneralConfig.radius_50,
+                child: data.picture == null || data.picture!.isEmpty
+                    ? Image.asset(ImagePath.std)
+                    : Image.network(
                         data.picture!.first,
                         fit: BoxFit.cover,
                         width: 60,
                         height: 60,
                       ),
-                    ),
+              ),
             ),
             STDSizedBox.width_8,
-            Text(data.firstName ?? "")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(data.firstName ?? ""),
+                Text(data.phone ?? ""),
+              ],
+            )
           ],
         ),
       ),
