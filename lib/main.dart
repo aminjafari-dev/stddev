@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:std_dev_task/core/dependency/dependency_injection.dart';
+import 'package:std_dev_task/core/router/page_route.dart';
+import 'package:std_dev_task/core/widgets/app_bar.dart';
 import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
 import 'package:std_dev_task/features/contact/presentation/pages/cantacts_page.dart';
 
@@ -24,15 +26,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'STD dev contacts'),
+      initialRoute: "/",
+      routes: AppPageRoute.routes,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key,});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -42,9 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: STDAppBar.appBar("STD dev contacts"),
+      
       body: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => locator<ContactBloc>())
@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const ContactsPage(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: ()=> Navigator.pushNamed(context, "add_contact"),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

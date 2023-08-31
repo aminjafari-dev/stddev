@@ -8,7 +8,7 @@ import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dar
 
 GetIt locator = GetIt.instance();
 setup() {
-  locator.registerSingleton(AppSizedBox());
+  locator.registerSingleton(STDSizedBox());
 
   // api providers
   locator.registerSingleton<ContactApiProvider>(ContactApiProvider());

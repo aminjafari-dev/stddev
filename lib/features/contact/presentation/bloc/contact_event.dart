@@ -1,10 +1,8 @@
 part of 'contact_bloc.dart';
 
-abstract class ContactEvent extends Equatable {
-  const ContactEvent();
+abstract class ContactEvent extends Equatable {}
 
+class GetContacts extends ContactEvent {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
-
-class GetContacts extends ContactEvent{}
