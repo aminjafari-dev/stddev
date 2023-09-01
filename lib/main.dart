@@ -9,6 +9,7 @@ import 'package:std_dev_task/features/contact/presentation/pages/cantacts_page.d
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
+  // Initialize the dependency injector
   locator = GetIt.instance;
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key,});
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -47,10 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
       
       body: MultiBlocProvider(
         providers: [
+          // Provide the ContactBloc using BlocProvider
           BlocProvider(create: (_) => locator<ContactBloc>())
-          // BlocProvider(
-          //   create: (context) => SubjectBloc(),
-          // ),
         ],
         child: const ContactsPage(),
       ),

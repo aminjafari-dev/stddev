@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:std_dev_task/config/general_config.dart';
-import 'package:std_dev_task/config/styles/image_path.dart';
+import 'package:std_dev_task/config/image_path.dart';
 import 'package:std_dev_task/core/widgets/sized_box.dart';
 
 import '../../domain/entities/contact_entity.dart';

@@ -1,12 +1,15 @@
 part of 'contact_bloc.dart';
 
+// Abstract base class for contact-related events
 abstract class ContactEvent extends Equatable {}
 
+// Event for fetching the list of contacts
 class GetContactsEvent extends ContactEvent {
   @override
   List<Object?> get props => [];
 }
 
+// Event for adding a new contact
 class AddContactEvent extends ContactEvent {
   final String firstName;
   final String lastName;
@@ -35,6 +38,7 @@ class AddContactEvent extends ContactEvent {
       ];
 }
 
+// Event for deleting a contact
 class DeleteContactEvent extends ContactEvent {
   final String id;
 
