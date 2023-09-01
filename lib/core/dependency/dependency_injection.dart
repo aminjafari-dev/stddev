@@ -7,6 +7,7 @@ import 'package:std_dev_task/features/contact/domain/repositories/contact_reposi
 import 'package:std_dev_task/features/contact/domain/usecases/create_contacts_usecase.dart';
 import 'package:std_dev_task/features/contact/domain/usecases/delete_contact.dart';
 import 'package:std_dev_task/features/contact/domain/usecases/get_contacts_usecase.dart';
+import 'package:std_dev_task/features/contact/domain/usecases/update_contact_usecase.dart';
 import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
 
 GetIt locator = GetIt.instance();
@@ -25,8 +26,11 @@ setup() {
   locator.registerSingleton<AddContactUsecase>(AddContactUsecase(locator()));
   locator
       .registerSingleton<DeleteContactUsecase>(DeleteContactUsecase(locator()));
+  locator
+      .registerSingleton<UpdateContactUsecase>(UpdateContactUsecase(locator()));
   // state managements
   locator.registerSingleton<ContactBloc>(ContactBloc(
+    locator(),
     locator(),
     locator(),
     locator(),

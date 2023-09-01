@@ -47,3 +47,32 @@ class DeleteContactEvent extends ContactEvent {
   @override
   List<Object?> get props => [id];
 }
+
+// Event for updating a contact
+class UpdateContactEvent extends ContactEvent {
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phone;
+  final String note;
+  final File? picture;
+
+  UpdateContactEvent({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.note,
+    required this.picture,
+  });
+
+  @override
+  List<Object?> get props => [
+        firstName,
+        lastName,
+        email,
+        phone,
+        note,
+        picture,
+      ];
+}

@@ -63,4 +63,24 @@ class RequestHandler {
       return e.toString();
     }
   }
+
+  static Future<dynamic> patch({
+    required String path,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    var options = Options(headers: _header);
+
+    try {
+      var response = await Dio().patch(
+        path,
+        options: options,
+        queryParameters: queryParameters,
+      );
+      return response;
+    } on DioException catch (e) {
+      return e.message;
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
 }

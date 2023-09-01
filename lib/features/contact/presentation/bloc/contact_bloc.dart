@@ -6,6 +6,7 @@ import 'package:std_dev_task/core/network/event_status.dart';
 import 'package:std_dev_task/features/contact/domain/usecases/create_contacts_usecase.dart';
 import 'package:std_dev_task/features/contact/domain/usecases/delete_contact.dart';
 import 'package:std_dev_task/features/contact/domain/usecases/get_contacts_usecase.dart';
+import 'package:std_dev_task/features/contact/domain/usecases/update_contact_usecase.dart';
 
 import '../../../../core/network/data_status.dart';
 import '../../domain/entities/contact_entity.dart';
@@ -18,15 +19,19 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
   final GetContactsUsecase contactsUsecase;
   final AddContactUsecase addContactUsecase;
   final DeleteContactUsecase deleteContactUsecase;
+  final UpdateContactUsecase updateContactUsecase;
 
   ContactBloc(
-      this.contactsUsecase, this.addContactUsecase, this.deleteContactUsecase)
-      : super(
+    this.contactsUsecase,
+    this.addContactUsecase,
+    this.deleteContactUsecase,
+    this.updateContactUsecase,
+  ) : super(
           ContactState(
-            contactList: EventInitial(),
-            addContact: EventInitial(),
-            deleteContact: EventInitial(),
-          ),
+              contactList: EventInitial(),
+              addContact: EventInitial(),
+              deleteContact: EventInitial(),
+              updateContact: EventInitial()),
         ) {
     on<GetContactsEvent>((event, emit) async {
       emit(state.copyWith(contactList: EventLoading()));
@@ -61,9 +66,9 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
             emit(state.copyWith(
                 contactList: EventError(contactListResult.error!)));
           }
-          emit(state.copyWith(addContact: EventCompleted(result.data!)));
+        return  emit(state.copyWith(addContact: EventCompleted(result.data!)));
         } else if (result is DataFailed) {
-          emit(state.copyWith(addContact: EventError(result.error!)));
+        return  emit(state.copyWith(addContact: EventError(result.error!)));
         }
       },
     );
@@ -88,6 +93,37 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
           emit(state.copyWith(deleteContact: EventCompleted(result.data!)));
         } else if (result is DataFailed) {
           emit(state.copyWith(deleteContact: EventError(result.error!)));
+        }
+      },
+    );
+
+    on<UpdateContactEvent>(
+      (event, emit) async {
+        emit(state.copyWith(updateContact: EventLoading()));
+        var result = await updateContactUsecase.call(
+          firstName: event.firstName,
+          lastName: event.lastName,
+          email: event.email,
+          phone: event.phone,
+          note: event.note,
+        );
+
+        if (result is DataSuccess) {
+          // Fetch updated contact list after adding a new contact
+          emit(state.copyWith(contactList: EventLoading()));
+          DataStatus<List<ContactEntity>> contactListResult =
+              await contactsUsecase.call();
+
+          if (contactListResult is DataSuccess) {
+            emit(state.copyWith(
+                contactList: EventCompleted(contactListResult.data!)));
+          } else if (contactListResult is DataFailed) {
+            emit(state.copyWith(
+                contactList: EventError(contactListResult.error!)));
+          }
+         return emit(state.copyWith(updateContact: EventCompleted(result.data!)));
+        } else if (result is DataFailed) {
+        return  emit(state.copyWith(updateContact: EventError(result.error!)));
         }
       },
     );

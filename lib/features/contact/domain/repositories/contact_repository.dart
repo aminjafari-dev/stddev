@@ -7,6 +7,7 @@ abstract class ContactRepository {
   Future<DataStatus<List<ContactEntity>>> getContacts();
   Future<DataStatus<ContactEntity>> getOneContact(String id);
   Future<DataStatus<bool>> deleteContact(String id);
+  Future<DataStatus<ContactEntity>> updateContact(String id);
 
 // post methode
   Future<DataStatus<ContactEntity>> addContact(

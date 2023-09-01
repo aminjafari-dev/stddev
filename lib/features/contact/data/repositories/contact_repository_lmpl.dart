@@ -94,4 +94,21 @@ class ContactRepositoryImpl extends ContactRepository {
           "Something went wrong. Please check your internet connection.");
     }
   }
+
+  // Update a contact by its ID from the API
+  @override
+  Future<DataStatus<ContactEntity>> updateContact(String id) async {
+    try {
+      Response result = await apiProvider.updateContact(id);
+
+      if (result is String) {
+        return DataFailed(result.data);
+      } else {
+        return  DataSuccess(ContactModel.fromJson(result.data));
+      }
+    } catch (e) {
+      return const DataFailed(
+          "Something went wrong. Please check your internet connection.");
+    }
+  }
 }

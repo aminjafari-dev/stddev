@@ -112,7 +112,7 @@ class _AddContactPageState extends State<AddContactPage> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   // Form validation successful
-                   locator<ContactBloc>().add(
+                  locator<ContactBloc>().add(
                     AddContactEvent(
                       firstName: _firstNameCont.text,
                       lastName: _lastNameCont.text,

@@ -59,4 +59,11 @@ class ContactApiProvider {
       path: "${Urls.contact}/$id",
     );
   }
+
+  // Deletes a contact by its ID from the API
+  Future<dynamic> updateContact(String id) async {
+    return await RequestHandler.patch(
+      path: "${Urls.contact}/$id",
+    );
+  }
 }
