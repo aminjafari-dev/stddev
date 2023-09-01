@@ -37,12 +37,6 @@ class ContactCard extends StatelessWidget {
                               data.picture!.first,
                             ),
                           )
-                    // Image.network(
-                    //     data.picture!.first,
-                    //     fit: BoxFit.cover,
-                    //     width: 60,
-                    //     height: 60,
-                    //   ),
                     ),
               ),
               STDSizedBox.width_8,
