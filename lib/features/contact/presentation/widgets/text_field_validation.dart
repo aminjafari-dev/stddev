@@ -1,7 +1,7 @@
 /// Extension on the String class for adding validation methods
 extension ValidationExtensions on String {
   /// Validates an email address based on a regular expression pattern
-  String? get emailValidate {
+  String? get emailValidation {
     // Regular expression pattern for email validation
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -26,9 +26,19 @@ extension ValidationExtensions on String {
 
     return null; // Validation successful
   }
+  /// Validates the size of a string value
+  String?  passValidation(value) {
+    if (isEmpty) {
+      return 'Please fill this';
+    } else if (value.length < 4) {
+      return 'Your value is not acceptable';
+    }
+
+    return null; // Validation successful
+  }
 
   /// Validates a mobile number based on a regular expression pattern
-  String? get phoneValidate {
+  String? get phoneValidation {
     // Regular expression pattern for mobile number validation
     String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
     RegExp regExp = RegExp(pattern);

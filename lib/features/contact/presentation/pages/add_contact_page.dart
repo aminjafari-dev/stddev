@@ -88,14 +88,14 @@ class _AddContactPageState extends State<AddContactPage> {
                     keyboardType: TextInputType.phone,
                     hintText: "Phone number",
                     validator: (value) {
-                      return value!.phoneValidate;
+                      return value!.phoneValidation;
                     },
                   ),
                   StdTextField(
                     controller: _emailCont,
                     hintText: "Email",
                     validator: (value) {
-                      return value!.emailValidate;
+                      return value!.emailValidation;
                     },
                   ),
                   StdTextField(
