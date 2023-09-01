@@ -54,11 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         child: const ContactsPage(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: ()=> Navigator.pushNamed(context, "add_contact"),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
   }
 }

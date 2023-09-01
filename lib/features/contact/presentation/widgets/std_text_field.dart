@@ -23,8 +23,10 @@ class StdTextField extends StatelessWidget {
       ),
       padding: GeneralConfig.all_8,
       child: TextFormField(
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           hintText: hintText,
+          
         ),
         validator: validator,
       ),

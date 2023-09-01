@@ -5,6 +5,8 @@ abstract class EventStatus<T> {}
 
 class EventLoading<T> extends EventStatus<T> {}
 
+class EventInitial<T> extends EventStatus<T> {}
+
 class EventCompleted<T> extends EventStatus<T> {
   final T data;
 

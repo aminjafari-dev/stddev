@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:std_dev_task/core/network/event_status.dart';
 import 'package:std_dev_task/core/widgets/sized_box.dart';
 import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
+import 'package:std_dev_task/features/contact/presentation/pages/add_contact_page.dart';
 import 'package:std_dev_task/features/contact/presentation/widgets/contact_card.dart';
 import '../../domain/entities/contact_entity.dart';
 
@@ -27,7 +28,7 @@ class _ContactsPageState extends State<ContactsPage> {
 
   // Dispatches a contact retrieval event to the bloc
   void getContacts() {
-    BlocProvider.of<ContactBloc>(context).add(GetContacts());
+    BlocProvider.of<ContactBloc>(context).add(GetContactsEvent());
   }
 
   @override
@@ -63,6 +64,18 @@ class _ContactsPageState extends State<ContactsPage> {
           }
           return Container(); // Empty container if none of the above cases
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          var rout = MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+              value: BlocProvider.of<ContactBloc>(context),
+              child: AddContactPage(),
+            ),
+          );
+          Navigator.push(context, rout);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

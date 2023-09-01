@@ -1,16 +1,18 @@
 import 'dart:io';
 
+import 'package:std_dev_task/core/network/data_status.dart';
 import 'package:std_dev_task/core/params/add_contact_params.dart';
+import 'package:std_dev_task/features/contact/domain/entities/contact_entity.dart';
 
 import '../repositories/contact_repository.dart';
 
-class CreateContactsUsecase {
+class AddContactUsecase {
   final ContactRepository repository;
 
-  CreateContactsUsecase(this.repository);
+  AddContactUsecase(this.repository);
 
   @override
-  Future call(
+  Future<DataSatus<ContactEntity>> call(
       {required String firstName,
       required String lastName,
       required String email,

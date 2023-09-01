@@ -1,13 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:std_dev_task/config/general_config.dart';
 import 'package:std_dev_task/core/widgets/app_bar.dart';
 import 'package:std_dev_task/core/widgets/sized_box.dart';
+import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
 import 'package:std_dev_task/features/contact/presentation/widgets/image_picker_dialog.dart';
 import 'package:std_dev_task/features/contact/presentation/widgets/std_text_field.dart';
 import 'package:std_dev_task/features/contact/presentation/widgets/text_field_validation.dart';
+
+import '../../../../core/network/event_status.dart';
 
 // Page for adding a new contact
 class AddContactPage extends StatefulWidget {
@@ -57,12 +61,12 @@ class _AddContactPageState extends State<AddContactPage> {
                 child: image_file == null
                     ? const Icon(Icons.add)
                     : ClipRRect(
-                      borderRadius: GeneralConfig.radius_50,
-                      child: Image.file(
+                        borderRadius: GeneralConfig.radius_50,
+                        child: Image.file(
                           image_file!,
                           fit: BoxFit.cover,
                         ),
-                    ),
+                      ),
               ),
             ),
             Form(
@@ -112,10 +116,39 @@ class _AddContactPageState extends State<AddContactPage> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   // Form validation successful
-                  print("Contact details are valid");
+                  BlocProvider.of<ContactBloc>(context).add(
+                    AddContactEvent(
+                      firstName: _firstNameCont.text,
+                      lastName: _lastNameCont.text,
+                      email: _emailCont.text,
+                      phone: _phoneNumberCont.text,
+                      note: _noteCont.text,
+                      picture: image_file,
+                    ),
+                  );
                 }
               },
-              child: const Text("Save Contact"),
+              child: BlocConsumer<ContactBloc, ContactState>(
+                listener: (context, state) {
+                  if (state.addContact is EventCompleted) {
+                    Navigator.pop(context);
+                  }
+                },
+                builder: (context, state) {
+                  if (state.addContact is EventLoading) {
+                    return const Padding(
+                      padding: GeneralConfig.all_8,
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state.addContact is EventError) {
+                    return const Text("something went wrog, try again");
+                  } else if (state.addContact is EventCompleted) {
+                    return const Text("Save Contact");
+                  } else {
+                    return const Text("Save Contact");
+                  }
+                },
+              ),
             ),
           ],
         ),

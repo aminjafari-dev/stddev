@@ -3,6 +3,7 @@ import 'package:std_dev_task/core/widgets/sized_box.dart';
 import 'package:std_dev_task/features/contact/data/datasources/contact_api_provider.dart';
 import 'package:std_dev_task/features/contact/data/repositories/contact_repository_lmpl.dart';
 import 'package:std_dev_task/features/contact/domain/repositories/contact_repository.dart';
+import 'package:std_dev_task/features/contact/domain/usecases/create_contacts_usecase.dart';
 import 'package:std_dev_task/features/contact/domain/usecases/get_contacts_usecase.dart';
 import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
 
@@ -19,7 +20,7 @@ setup() {
 
   // usecases
   locator.registerSingleton<GetContactsUsecase>(GetContactsUsecase(locator()));
-
+  locator.registerSingleton<AddContactUsecase>(AddContactUsecase(locator()));
   // state managements
-  locator.registerSingleton<ContactBloc>(ContactBloc(locator()));
+  locator.registerSingleton<ContactBloc>(ContactBloc(locator(), locator()));
 }

@@ -5,7 +5,7 @@ import '../entities/contact_entity.dart';
 abstract class ContactRepository {
   Future<DataSatus<List<ContactEntity>>> getContacts();
 
-  Future<DataSatus<dynamic>> addContact(
+  Future<DataSatus<ContactEntity>> addContact(
     {
       required String firstName,
       required String lastName,

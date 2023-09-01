@@ -31,7 +31,7 @@ class ContactRepositoryImpl extends ContactRepository {
   }
 
   @override
-  Future<DataSatus<dynamic>> addContact({
+  Future<DataSatus<ContactEntity>> addContact({
     required String firstName,
     required String lastName,
     required String phone,
@@ -40,15 +40,23 @@ class ContactRepositoryImpl extends ContactRepository {
     File? picture,
   }) async {
     try {
-      var result = await apiProvider.addContact(file: picture);
+      Response result = await apiProvider.addContact(
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        note: note,
+        picture: picture,
+      );
       if (result is String) {
-        return DataFailed(result);
+        return DataFailed(result.data);
       } else {
-        return DataSuccess(result);
+        return DataSuccess(ContactModel.fromJson(result.data));
       }
     } catch (e) {
-      return const DataSuccess(
-          "something went wrong. please check your internet");
+      return const DataFailed(
+        "something went wrong. please check your internet",
+      );
     }
   }
 }

@@ -28,17 +28,11 @@ class RequestHandler {
 
   static Future<dynamic> post({
     required String path,
-    File? file,
+    required Object data,
   }) async {
     var options = Options(headers: _header);
 
     try {
-      var data;
-      if (file != null) {
-        data = FormData.fromMap({
-          'file': await MultipartFile.fromFile(file.path, filename: "image"),
-        });
-      }
 
       var response = await Dio().post(
         path,
