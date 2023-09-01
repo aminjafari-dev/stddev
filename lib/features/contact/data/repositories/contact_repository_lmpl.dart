@@ -1,37 +1,38 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:std_dev_task/features/contact/data/datasources/contact_api_provider.dart';
 import 'package:std_dev_task/features/contact/domain/entities/contact_entity.dart';
 import 'package:std_dev_task/core/network/data_status.dart';
 import 'package:std_dev_task/features/contact/domain/repositories/contact_repository.dart';
-
 import '../models/contact_model.dart';
 
+// Implementation of the ContactRepository interface
 class ContactRepositoryImpl extends ContactRepository {
   final ContactApiProvider apiProvider;
 
   ContactRepositoryImpl(this.apiProvider);
 
+  // Fetches a list of contacts from the API
   @override
-  Future<DataSatus<List<ContactEntity>>> getContacts() async {
+  Future<DataStatus<List<ContactEntity>>> getContacts() async {
     try {
       var result = await apiProvider.getContacts();
       if (result is String) {
         return DataFailed(result);
       } else {
-        var resul = (result as Response).data;
-        return DataSuccess(
-            List.from((resul as List).map((e) => ContactModel.fromJson(e))));
+        var resultList = (result as Response).data;
+        return DataSuccess(List.from(
+            (resultList as List).map((e) => ContactModel.fromJson(e))));
       }
     } catch (e) {
       return const DataFailed(
-          "something went wrong. please check your internet");
+          "Something went wrong. Please check your internet connection.");
     }
   }
 
+  // Adds a new contact to the API
   @override
-  Future<DataSatus<ContactEntity>> addContact({
+  Future<DataStatus<ContactEntity>> addContact({
     required String firstName,
     required String lastName,
     required String phone,
@@ -55,23 +56,42 @@ class ContactRepositoryImpl extends ContactRepository {
       }
     } catch (e) {
       return const DataFailed(
-        "something went wrong. please check your internet",
+        "Something went wrong. Please check your internet connection.",
       );
     }
   }
 
+  // Fetches a single contact by its ID from the API
   @override
-  Future<DataSatus<ContactEntity>> getOneContact(String id) async {
+  Future<DataStatus<ContactEntity>> getOneContact(String id) async {
     try {
-      Response resutl = await apiProvider.getOneContact(id);
+      Response result = await apiProvider.getOneContact(id);
 
-      if (resutl is String) {
-        return DataFailed(resutl.data);
+      if (result is String) {
+        return DataFailed(result.data);
       } else {
-        return DataSuccess(resutl.data);
+        return DataSuccess(result.data);
       }
     } catch (e) {
-      return DataFailed("Sometihng went wrong, please check your internet");
+      return const DataFailed(
+          "Something went wrong. Please check your internet connection.");
+    }
+  }
+
+  // Deletes a contact by its ID from the API
+  @override
+  Future<DataStatus<bool>> deleteContact(String id) async {
+    try {
+      Response result = await apiProvider.deleteContact(id);
+
+      if (result is String) {
+        return DataFailed(result.data);
+      } else {
+        return const DataSuccess(true);
+      }
+    } catch (e) {
+      return const DataFailed(
+          "Something went wrong. Please check your internet connection.");
     }
   }
 }

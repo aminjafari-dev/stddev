@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:std_dev_task/config/general_config.dart';
+import 'package:std_dev_task/core/dependency/dependency_injection.dart';
 import 'package:std_dev_task/core/widgets/app_bar.dart';
 import 'package:std_dev_task/core/widgets/sized_box.dart';
 import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
@@ -111,7 +112,7 @@ class _AddContactPageState extends State<AddContactPage> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   // Form validation successful
-                  BlocProvider.of<ContactBloc>(context).add(
+                   locator<ContactBloc>().add(
                     AddContactEvent(
                       firstName: _firstNameCont.text,
                       lastName: _lastNameCont.text,

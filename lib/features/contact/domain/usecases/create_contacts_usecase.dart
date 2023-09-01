@@ -10,7 +10,7 @@ class AddContactUsecase {
   AddContactUsecase(this.repository);
 
   @override
-  Future<DataSatus<ContactEntity>> call(
+  Future<DataStatus<ContactEntity>> call(
       {required String firstName,
       required String lastName,
       required String email,

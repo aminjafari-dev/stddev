@@ -1,12 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:std_dev_task/config/general_config.dart';
 import 'package:std_dev_task/core/widgets/sized_box.dart';
 
-class CircleButton extends StatelessWidget {
-  CircleButton(
+class ImagePickerButton extends StatelessWidget {
+  ImagePickerButton(
       {super.key,
       required this.icon,
       required this.title,
@@ -23,9 +22,9 @@ class CircleButton extends StatelessWidget {
       onTap: () async {
         var image = await ImagePicker().pickImage(source: source);
         if (image != null) {
-        File file =File(image.path);
+          File file = File(image.path);
           onTap(file);
-        Navigator.pop(context, file);
+          Navigator.pop(context, file);
         }
       },
       child: Container(
@@ -38,6 +37,7 @@ class CircleButton extends StatelessWidget {
             Icon(icon),
             STDSizedBox.width_8,
             Text(title, style: const TextStyle(fontSize: 13)),
+            
           ],
         ),
       ),

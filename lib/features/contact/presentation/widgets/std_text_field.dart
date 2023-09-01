@@ -23,6 +23,7 @@ class StdTextField extends StatelessWidget {
       ),
       padding: GeneralConfig.all_8,
       child: TextFormField(
+        controller: controller,
         keyboardType: keyboardType,
         decoration: InputDecoration(
           hintText: hintText,

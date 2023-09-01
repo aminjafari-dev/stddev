@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:std_dev_task/config/general_config.dart';
-import 'package:std_dev_task/features/contact/presentation/widgets/circle_button.dart';
+import 'package:std_dev_task/features/contact/presentation/widgets/image_picker_button.dart';
 
 class STDImagePicker {
   static Future<File?> imageChoice(BuildContext context) async {
@@ -18,7 +18,7 @@ class STDImagePicker {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CircleButton(
+                  ImagePickerButton(
                     icon: Icons.photo,
                     title: "From gallery",
                     source: ImageSource.gallery,
@@ -27,7 +27,7 @@ class STDImagePicker {
                       file = v;
                     },
                   ),
-                  CircleButton(
+                  ImagePickerButton(
                     icon: Icons.photo_camera,
                     title: "Take a photo",
                     source: ImageSource.camera,

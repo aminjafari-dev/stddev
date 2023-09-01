@@ -3,20 +3,17 @@ import 'package:std_dev_task/core/network/data_status.dart';
 import '../entities/contact_entity.dart';
 
 abstract class ContactRepository {
-  // get methode 
-  Future<DataSatus<List<ContactEntity>>> getContacts();
-  Future<DataSatus<ContactEntity>> getOneContact(String id);
-
+  // get methode
+  Future<DataStatus<List<ContactEntity>>> getContacts();
+  Future<DataStatus<ContactEntity>> getOneContact(String id);
+  Future<DataStatus<bool>> deleteContact(String id);
 
 // post methode
-  Future<DataSatus<ContactEntity>> addContact(
-    {
-      required String firstName,
+  Future<DataStatus<ContactEntity>> addContact(
+      {required String firstName,
       required String lastName,
       required String phone,
       required String email,
       required String note,
-      File? picture
-    }
-  );
+      File? picture});
 }

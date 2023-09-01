@@ -7,6 +7,7 @@ import 'package:std_dev_task/core/network/event_status.dart';
 import 'package:std_dev_task/core/widgets/sized_box.dart';
 import 'package:std_dev_task/features/contact/presentation/bloc/contact_bloc.dart';
 import 'package:std_dev_task/features/contact/presentation/pages/add_contact_page.dart';
+import 'package:std_dev_task/features/contact/presentation/pages/contact_details_page.dart';
 import 'package:std_dev_task/features/contact/presentation/widgets/contact_card.dart';
 import '../../domain/entities/contact_entity.dart';
 
@@ -51,12 +52,13 @@ class _ContactsPageState extends State<ContactsPage> {
                 return ContactCard(
                   data: data[index],
                   onTap: () {
-                    // ContactApiProvider().getOneContact(data[index].id!);
-                    Navigator.pushNamed(
-                      context,
-                      "/contact_details",
-                      arguments: data[index],
+                    var rout = MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                        value: BlocProvider.of<ContactBloc>(context),
+                        child: ContactDetailsPage(contact: data[index],),
+                      ),
                     );
+                    Navigator.push(context, rout);
                   },
                 );
               },
@@ -89,5 +91,4 @@ class _ContactsPageState extends State<ContactsPage> {
       ),
     );
   }
-  
 }

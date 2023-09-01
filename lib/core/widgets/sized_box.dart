@@ -5,4 +5,5 @@ class STDSizedBox {
   static SizedBox width_4 = const SizedBox(width: 4);
   static SizedBox width_8 = const SizedBox(width: 8);
   static SizedBox height_12 = const SizedBox(height: 12);
+  static SizedBox height_30 = const SizedBox(height: 30);
 }

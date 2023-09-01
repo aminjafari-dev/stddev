@@ -1,14 +1,14 @@
-abstract class DataSatus<T> {
+abstract class DataStatus<T> {
   final T? data;
   final String? error;
 
-  const DataSatus(this.data, this.error);
+  const DataStatus(this.data, this.error);
 }
 
-class DataSuccess<T> extends DataSatus<T> {
+class DataSuccess<T> extends DataStatus<T> {
   const DataSuccess(T? data) : super(data, null);
 }
 
-class DataFailed<T> extends DataSatus<T> {
+class DataFailed<T> extends DataStatus<T> {
   const DataFailed(String? error) : super(null, error);
 }

@@ -16,12 +16,12 @@ class AddContactEvent extends ContactEvent {
   final File? picture;
 
   AddContactEvent({
-   required this.firstName,
-   required this.lastName,
-   required this.email,
-   required this.phone,
-   required this.note,
-   required this.picture,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.note,
+    required this.picture,
   });
 
   @override
@@ -33,4 +33,13 @@ class AddContactEvent extends ContactEvent {
         note,
         picture,
       ];
+}
+
+class DeleteContactEvent extends ContactEvent {
+  final String id;
+
+  DeleteContactEvent(this.id);
+
+  @override
+  List<Object?> get props => [id];
 }

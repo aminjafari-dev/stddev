@@ -43,4 +43,10 @@ class ContactApiProvider {
       path: "${Urls.contact}/$id",
     );
   }
+
+  Future deleteContact(String id) async {
+    return await RequestHandler.delete(
+      path: "${Urls.contact}/$id",
+    );
+  }
 }

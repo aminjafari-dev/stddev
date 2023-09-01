@@ -6,10 +6,9 @@ class GetContactsUsecase {
   final ContactRepository repository;
 
   GetContactsUsecase(this.repository);
-  
+
   @override
-  Future<DataSatus<List<ContactEntity>>> call() {
+  Future<DataStatus<List<ContactEntity>>> call() {
     return repository.getContacts();
   }
-
 }
