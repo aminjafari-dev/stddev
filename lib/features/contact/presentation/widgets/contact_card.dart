@@ -6,7 +6,7 @@ import 'package:std_dev_task/core/widgets/sized_box.dart';
 import '../../domain/entities/contact_entity.dart';
 
 class ContactCard extends StatelessWidget {
-  const ContactCard({super.key, required this.data,required this.onTap});
+  const ContactCard({super.key, required this.data, required this.onTap});
   final ContactEntity data;
   final void Function()? onTap;
   @override
@@ -25,16 +25,25 @@ class ContactCard extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: ClipRRect(
-                  borderRadius: GeneralConfig.radius_50,
-                  child: data.picture == null || data.picture!.isEmpty
-                      ? Image.asset(ImagePath.std)
-                      : Image.network(
-                          data.picture!.first,
-                          fit: BoxFit.cover,
-                          width: 60,
-                          height: 60,
-                        ),
-                ),
+                    borderRadius: GeneralConfig.radius_50,
+                    child: data.picture == null || data.picture!.isEmpty
+                        ? Image.asset(ImagePath.std)
+                        : FadeInImage(
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.cover,
+                            placeholder: AssetImage(ImagePath.loading),
+                            image: NetworkImage(
+                              data.picture!.first,
+                            ),
+                          )
+                    // Image.network(
+                    //     data.picture!.first,
+                    //     fit: BoxFit.cover,
+                    //     width: 60,
+                    //     height: 60,
+                    //   ),
+                    ),
               ),
               STDSizedBox.width_8,
               Column(

@@ -9,7 +9,7 @@ class GetOneContactUsecase {
   GetOneContactUsecase(this.contactRepository);
 
   @override
-  Future<DataSatus<ContactEntity>> call(String id) {
+  Future<DataStatus<ContactEntity>> call(String id) {
     return contactRepository.getOneContact(id);
   }
 }
