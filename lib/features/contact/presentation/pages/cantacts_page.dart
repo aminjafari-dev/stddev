@@ -50,6 +50,14 @@ class _ContactsPageState extends State<ContactsPage> {
               itemBuilder: (context, index) {
                 return ContactCard(
                   data: data[index],
+                  onTap: () {
+                    // ContactApiProvider().getOneContact(data[index].id!);
+                    Navigator.pushNamed(
+                      context,
+                      "/contact_details",
+                      arguments: data[index],
+                    );
+                  },
                 );
               },
               separatorBuilder: (c, i) => STDSizedBox.height_12,
@@ -65,6 +73,8 @@ class _ContactsPageState extends State<ContactsPage> {
           return Container(); // Empty container if none of the above cases
         },
       ),
+
+      // The button for go to the add contact page
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           var rout = MaterialPageRoute(
@@ -79,4 +89,5 @@ class _ContactsPageState extends State<ContactsPage> {
       ),
     );
   }
+  
 }

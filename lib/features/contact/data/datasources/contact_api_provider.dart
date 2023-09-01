@@ -36,4 +36,11 @@ class ContactApiProvider {
 
     return RequestHandler.post(path: Urls.contact, data: data);
   }
+
+
+  Future getOneContact(String id) async {
+    return await RequestHandler.get(
+      path: "${Urls.contact}/$id",
+    );
+  }
 }

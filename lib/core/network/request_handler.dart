@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:std_dev_task/core/utils/constants.dart';
 
@@ -9,15 +7,15 @@ class RequestHandler {
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  
-  static Future<dynamic> get({required String path}) async {
+  static Future<dynamic> get({
+    required String path,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     var options = Options(headers: _header);
 
     try {
-      var response = await Dio().get(
-        path,
-        options: options,
-      );
+      var response = await Dio()
+          .get(path, options: options, queryParameters: queryParameters);
       return response;
     } on DioException catch (e) {
       return e.message;
@@ -33,7 +31,6 @@ class RequestHandler {
     var options = Options(headers: _header);
 
     try {
-
       var response = await Dio().post(
         path,
         data: data,

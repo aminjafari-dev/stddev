@@ -59,4 +59,19 @@ class ContactRepositoryImpl extends ContactRepository {
       );
     }
   }
+
+  @override
+  Future<DataSatus<ContactEntity>> getOneContact(String id) async {
+    try {
+      Response resutl = await apiProvider.getOneContact(id);
+
+      if (resutl is String) {
+        return DataFailed(resutl.data);
+      } else {
+        return DataSuccess(resutl.data);
+      }
+    } catch (e) {
+      return DataFailed("Sometihng went wrong, please check your internet");
+    }
+  }
 }

@@ -27,13 +27,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: "/",
-      routes: AppPageRoute.routes,
+      routes: STDPageRoute.routes,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key,});
+  const MyHomePage({
+    super.key,
+  });
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -44,7 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: STDAppBar.appBar("STD dev contacts"),
-      
       body: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => locator<ContactBloc>())

@@ -24,15 +24,10 @@ class AddContactPage extends StatefulWidget {
 class _AddContactPageState extends State<AddContactPage> {
   // Text editing controllers for various fields
   final TextEditingController _firstNameCont = TextEditingController();
-
   final TextEditingController _lastNameCont = TextEditingController();
-
   final TextEditingController _phoneNumberCont = TextEditingController();
-
   final TextEditingController _emailCont = TextEditingController();
-
   final TextEditingController _noteCont = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   File? image_file;
