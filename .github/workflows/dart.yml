@@ -39,5 +39,5 @@ jobs:
 
         
       - name: flutter run
-        run: flutter run
+        run: flutter run -d all
         
